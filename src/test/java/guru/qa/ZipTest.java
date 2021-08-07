@@ -1,12 +1,9 @@
 package guru.qa;
 
 import org.apache.commons.io.FileUtils;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
 import org.junit.jupiter.api.Test;
-
-
 import java.io.File;
 import static testUtils.FileUtils.readTextFile;
 import static testUtils.FileUtils.readZipFile;
