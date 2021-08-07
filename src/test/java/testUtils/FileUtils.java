@@ -2,11 +2,15 @@ package testUtils;
 
 import net.lingala.zip4j.core.ZipFile;
 import org.apache.commons.io.IOUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 
@@ -18,6 +22,14 @@ public class FileUtils {
             XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
             fis.close();
         return extractor.getText();
+    }
+
+    public static String readPDFFile (String pdfFilePath) throws Exception {
+        PDDocument document = PDDocument.load(new File(pdfFilePath));
+        PDFTextStripper stripper = new PDFTextStripper();
+        String text = stripper.getText(document);
+        document.close();
+        return text;
     }
 
     public static void readZipFile (String zipFilePath, String password, String unzipFolderPath) throws Exception {
